@@ -1,0 +1,83 @@
+
+
+<html>
+
+<head>
+    
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+<meta name="viewport" content="width=device-width, initial-scale=10, maximum-scale=10, user-scalable=0">
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-tubeplayer/2.1.0/jquery.tubeplayer.min.js"></script>
+
+</head>    
+<script>
+    query2json = function(){
+        query = location.href.split("?");
+        str = query[1];
+        var j,q;
+        q = str.split("&");
+        j={};
+        $.each(q,function(i,arr){
+         arr=arr.split('=');
+        return j[arr[0]]=arr[1];
+        });
+        return j;
+
+    };
+
+</script>
+
+<body>
+  <div id="app">
+ <div id='youtube-video-player'></div>
+
+
+  </div>
+   
+
+
+
+ <script>
+
+
+     var app = new Vue({
+         el: "#app",
+         data : {},
+         methods: {
+           
+         },
+         
+
+         
+         mounted(){
+            json = query2json();
+             
+            window.$player = jQuery("#youtube-video-player").tubeplayer({
+                width: 1280,
+                height: 720,
+                initialVideo: json.id,
+                onPlayerLoaded: function(){
+                    this.tubeplayer("volume", 25);
+                    this.tubeplayer("seek", json.seek);
+                    
+                    setInterval( function() {
+                        console.log(jQuery("#youtube-video-player").tubeplayer("data").currentTime); 
+                    }, 60000);
+                },
+                onPlayerEnded: function(){ 
+                    alert("종료되었습니다"); 
+                }
+            });
+
+    }
+ })
+
+
+</script>
+
+</body>
+</html>

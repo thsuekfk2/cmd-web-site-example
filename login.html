@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-tubeplayer/2.1.0/jquery.tubeplayer.min.js"></script>
+    <script src="https://kit.fontawesome.com/40935a57d3.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    
+<div id="app">
+
+    아이디<input type="text" v-model="user_id">
+    비밀번호<input type="password" v-model="user_pass">
+
+    <button @click=loginClick>로그인</button>
+
+</div>
+
+
+    <script>
+        
+            var app = new Vue({
+         el: "#app",
+         data : {
+            user_id : '홍',  user_pass : '123' ,
+         },
+         methods: {
+            loginClick : function() { 
+                if (this.user_id == this.user_pass)
+                location.href  = "index.html?user_id=" + this.user_id;
+                else 
+                alert("다시 확인해주세요");
+
+            }
+           
+         },
+        }
+            )
+         
+    </script>
+</body>
+</html>
